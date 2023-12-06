@@ -1,4 +1,4 @@
-class BinaryTreeAVL {
+class ArvoreAVL {
     Node raiz;
 
     int altura(Node node) {
@@ -76,15 +76,6 @@ class BinaryTreeAVL {
         node = rebalancear(node);
         return node;
     }
-
-    Node menorValor(Node node) {
-        Node atual = node;
-        while (atual.esquerda != null) {
-            atual = atual.esquerda;
-        }
-        return atual;
-    }
-
     void passadaEmOrdem(Node node) {
         if (node != null) {
             passadaEmOrdem(node.esquerda);

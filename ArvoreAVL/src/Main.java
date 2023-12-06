@@ -4,7 +4,7 @@ public class Main {
     private static final String TEMPO = "Tempo";
 
     public static void main(String[] args) {
-        BinaryTreeAVL arvoreAVL = new BinaryTreeAVL();
+        ArvoreAVL arvoreAVL = new ArvoreAVL();
         BaseDeDados pegaArquivo = new BaseDeDados();
 
         for (int valor : VALORES) {
@@ -16,13 +16,13 @@ public class Main {
         }
     }
 
-    private static void inserirNaArvore(BinaryTreeAVL arvore, int[] numeros) {
+    private static void inserirNaArvore(ArvoreAVL arvore, int[] numeros) {
         for (int n : numeros) {
             arvore.inserir(n);
         }
     }
 
-    private static void imprimirResultado(BinaryTreeAVL arvore, String ordem) {
+    private static void imprimirResultado(ArvoreAVL arvore, String ordem) {
         long comeco = System.currentTimeMillis();
 
         System.out.println("Árvore AVL");
