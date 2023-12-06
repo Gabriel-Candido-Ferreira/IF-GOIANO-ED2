@@ -1,31 +1,22 @@
 import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
 
 public class TimSort {
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        Random random = new Random();
-        System.out.println("Digite quantos valores deseja ordenar: ");
-        int[] data = new int[scan.nextInt()];
-        for (int i = 0; i < data.length; i++) {
-            data[i] = random.nextInt();
-        }
+    private static final String TEMPO = "Tempo";
 
-        // Inicia o timer
+    public static void main(String[] args) {
+        BaseDeDados baseDeDados = new BaseDeDados();
+        int[] data = baseDeDados.readDataFromFile("dados100_mil.txt");
+
         long start = System.currentTimeMillis();
 
-        // Ordena a lista usando o algoritmo TimSort
         timSort(data);
 
-        // Imprime o tempo de execução
         long end = System.currentTimeMillis();
-        System.out.println("Tempo de execução: " + (end - start) + " ms");
+        imprimirTempo(end - start);
     }
 
     public static void timSort(int[] data) {
-        // Divide a lista em pequenos blocos
         int minRun = 32;
         for (int i = 0; i < data.length; i += minRun) {
             int lo = i;
@@ -33,24 +24,20 @@ public class TimSort {
             insertionSort(data, lo, hi);
         }
 
-        // Junta os blocos ordenados
         for (int i = minRun; i < data.length; i *= 2) {
             for (int lo = 0; lo < data.length - i; lo += 2 * i) {
                 int mid = lo + i;
                 int hi = Math.min(lo + 2 * i - 1, data.length - 1);
 
-                // Merge os dois blocos
                 merge(data, lo, mid, hi);
             }
         }
     }
 
     private static void merge(int[] data, int lo, int mid, int hi) {
-        // Cria dois arrays para armazenar os dois blocos
         int[] left = Arrays.copyOfRange(data, lo, mid + 1);
         int[] right = Arrays.copyOfRange(data, mid + 1, hi + 1);
 
-        // Itera sobre os dois blocos, comparando os elementos
         int i = 0;
         int j = 0;
         int k = lo;
@@ -63,7 +50,6 @@ public class TimSort {
             }
         }
 
-        // Copia os elementos restantes do bloco não vazio
         while (i < left.length) {
             data[k++] = left[i++];
         }
@@ -85,5 +71,14 @@ public class TimSort {
 
             data[j + 1] = key;
         }
+    }
+
+    private static void imprimirTempo(long duracao) {
+        long milisegundos = (duracao % 1000) / 100;
+        long segundos = (duracao / 1000) % 60;
+        long minutos = (duracao / (1000 * 60)) % 60;
+        long horas = (duracao / (1000 * 60 * 60)) % 24;
+        String tempo = String.format("%02d:%02d:%02d:%02d", horas, minutos, segundos, milisegundos);
+        System.out.println(TEMPO + ": " + tempo);
     }
 }
