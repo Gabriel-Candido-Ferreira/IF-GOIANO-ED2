@@ -76,11 +76,11 @@ class ArvoreAVL {
         node = rebalancear(node);
         return node;
     }
-    void passadaEmOrdem(Node node) {
+    void emOrdem(Node node) {
         if (node != null) {
-            passadaEmOrdem(node.esquerda);
+            emOrdem(node.esquerda);
             System.out.print(" " + node.valor);
-            passadaEmOrdem(node.direita);
+            emOrdem(node.direita);
         }
     }
 }
