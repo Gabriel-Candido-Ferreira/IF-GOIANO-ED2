@@ -1,4 +1,3 @@
-// No.java
 public class No<T extends Comparable<T>> {
     T data;
     No<T> left, right;
